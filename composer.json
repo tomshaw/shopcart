@@ -1,0 +1,65 @@
+{
+    "name": "tomshaw/shopcart",
+    "description": "A modern easy to use Laravel shopping cart",
+    "keywords": [
+        "ecommerce",
+        "shopping-cart",
+        "shopcart",
+        "laravel"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tom Shaw",
+            "email": "tomshaw@tomshaw.us",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/events": "^10.14",
+        "illuminate/session": "^10.14",
+        "illuminate/support": "^10.14"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/larastan": "^2.6",
+        "orchestra/testbench": "^8.5",
+        "pestphp/pest": "^2.8",
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "TomShaw\\ShopCart\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TomShaw\\ShopCart\\Tests\\": "tests"
+        }
+    },
+    "scripts" : {
+        "analyse" : "vendor/bin/phpstan analyse",
+        "test" : "vendor/bin/pest",
+        "test-coverage" : "vendor/bin/pest --coverage"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TomShaw\\ShopCart\\ShopCartServiceProvider"
+            ],
+            "aliases": {
+                "ShopCart": "TomShaw\\ShopCart\\Facades\\ShopCartFacade"
+            }
+        }
+    },
+    "minimum-stability" : "dev",
+    "prefer-stable" : true,
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        },
+        "sort-packages": true
+    }
+}
