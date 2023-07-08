@@ -78,6 +78,10 @@ class ShopCartTest extends TestCase
         $cartItem = ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1295);
 
         $this->assertEquals(Helpers::numberFormat($cartItem->price), "1,295.00");
+
+        $cartItem = ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1299.95);
+
+        $this->assertEquals(Helpers::numberFormat($cartItem->price), "1,299.95");
     }
 
     public function test_cart_should_update_and_return_correct_cart_totals(): void
