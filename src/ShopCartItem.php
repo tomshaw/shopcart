@@ -57,7 +57,7 @@ final class ShopCartItem
      * @param  int  $id
      * @param  string  $name
      * @param  int  $quantity
-     * @param  int  $price
+     * @param  float  $price
      * @param  int|null  $tax
      * @param  \Illuminate\Support\Collection  $options
      * @return void
@@ -66,7 +66,7 @@ final class ShopCartItem
         public int $id,
         public string $name,
         public int $quantity,
-        public int $price,
+        public float $price,
         public float|null $tax = null,
         public Collection $options = new Collection(),
     ) {
@@ -124,11 +124,11 @@ final class ShopCartItem
      * @param  int  $id
      * @param  string  $name
      * @param  int  $quantity
-     * @param  int  $price
-     * @param  int|float|null  $tax
+     * @param  float  $price
+     * @param  float|null  $tax
      * @return \TomShaw\ShopCart\ShopCartItem
      */
-    public static function create(int $id, string $name, int $quantity, int $price, int|float|null $tax = null): self
+    public static function create(int $id, string $name, int $quantity, float $price, float|null $tax = null): self
     {
         $validator = self::validate($id, $name, $quantity, $price, $tax);
 

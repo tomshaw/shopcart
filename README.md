@@ -14,7 +14,7 @@ You can install the package via composer:
 composer require tomshaw/shopcart
 ```
 
-### Publish configuration file
+Publish configuration file
 
 ```
 php artisan vendor:publish --provider="TomShaw\ShopCart\ShopCartServiceProvider" --tag=config
@@ -30,12 +30,12 @@ php artisan vendor:publish --provider="TomShaw\ShopCart\ShopCartServiceProvider"
 Add item to the cart.
 
 ```php
-$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price);
-
-ShopCart::add($cartItem);
+ShopCartFacade::add(
+    ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price)
+);
 ```
 
-Add item option attributes.
+Add miscellaneous options to cart items.
 
 ```php
 $cartItem = ShopCartItem::create($product->id, $product->name, 1, $product->price);
@@ -43,124 +43,128 @@ $cartItem = ShopCartItem::create($product->id, $product->name, 1, $product->pric
 $cartItem->size = 'XL';
 $cartItem->color = 'blue';
 
-ShopCart::add($cartItem);
+ShopCartFacade::add($cartItem);
 ```
 
-Add specified item tax rate.
+Adding item specific tax rates.
 
 > Note: This overrides the default tax rate set in the cart configuration.
 
 ```php
-$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price, tax: 8.25);
+$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price, tax: 6.250);
 
-ShopCart::add($cartItem);
+ShopCartFacade::add($cartItem);
 ```
 
-Updating an item in the shopping cart.
+Updating items in the shopping cart.
 
-> Note: Constructor properties are auto-validated when adding or updating cart items.
+> Note: Constructor properties are validated when adding or updating cart items.
 
 ```php
-$cartItem = ShopCart::get($rowId);
+$cartItem = ShopCartFacade::get($rowId);
 
-$cartItem->quantity = 2;
+$cartItem->quantity = 2; 
+
 $cartItem->size = '2XL';
 $cartItem->color = 'black';
 
-ShopCart::update($cartItem);
+ShopCartFacade::update($cartItem);
 ```
 
 ```php
-$cartItem = ShopCart::where('id', '===', $id)->first();
+$cartItem = ShopCartFacade::where('id', '===', $id)->first();
 
 $cartItem->quantity = 2;
+
 $cartItem->size = '2XL';
 $cartItem->color = 'black';
 
-ShopCart::update($cartItem);
+ShopCartFacade::update($cartItem);
 ```
 
-Remove item from the shopping cart.
+Removing items from the shopping cart.
 
 ```php
-ShopCart::remove(ShopCart::get($rowId));
+ShopCartFacade::remove(ShopCartFacade::get($rowId));
 ```
 
 ```php
-ShopCart::remove(ShopCart::where('id', '===', $id)->first());
+ShopCartFacade::remove(ShopCartFacade::where('id', '===', $id)->first());
 ```
 
 Return an item from the cart by `rowId`.
 
 ```php
-$cartItem = ShopCart::get($rowId);
+$cartItem = ShopCartFacade::get($rowId);
 ```
 
 Checking if an item exists in the cart by `rowId`.
 
 ```php
-$boolean = ShopCart::has($rowId);
+$boolean = ShopCartFacade::has($rowId);
 ```
 
-Returning the cart collection.
+Fetching the cart collection.
 
 ```php
-$cartItems = ShopCart::all();
+$cartItems = ShopCartFacade::all();
 ```
 
 ```php
-$cartItems = ShopCart::get();
+$cartItems = ShopCartFacade::get();
 ```
 
 Searching for cart items.
 
 ```php
-$cartItems = ShopCart::where('id', '===', $productId);
+$cartItems = ShopCartFacade::where('id', '===', $productId);
 ```
 
-Checking if cart is empty or not.
+Checking if the shopping cart is empty or not.
 
 ```php
-ShopCart::isEmpty();
-```
-
-```php
-ShopCart::isNotEmpty();
-```
-
-Empty the shopping cart.
-
-```php
-ShopCart::forget();
-```
-
-Output cart as `array` or `json`;
-
-```php
-ShopCart::toArray();
+ShopCartFacade::isEmpty();
 ```
 
 ```php
-ShopCart::toJson();
+ShopCartFacade::isNotEmpty();
+```
+
+Emptying the shopping cart.
+
+```php
+ShopCartFacade::forget();
+```
+
+Casting the cart as an `array` or `json`;
+
+```php
+ShopCartFacade::toArray();
+```
+
+```php
+ShopCartFacade::toJson();
 ```
 
 ## Cart Totals.
 
-> The total method sums properties: `tax`, `price`, `subtotal` and `quantity`. When no property is specified the total price will be returned.
+> The total method sums properties: `tax`, `price`, `subtotal` and `quantity`. 
+
+> Note: When no property is specified the cart total `price` is returned.
 
 ```php
-$totalPrice = ShopCart::total('price');
+$totalPrice = ShopCartFacade::total('price');
 ```
 ```php
-$totalQuantity = ShopCart::total(property: 'quantity', numberFormat: false);
-```
-
-```php
-$subTotal = ShopCart::total('subtotal');
+$totalQuantity = ShopCartFacade::total(property: 'quantity', numberFormat: false);
 ```
 
 ```php
-$totalTax = ShopCart::total('tax');
+$subTotal = ShopCartFacade::total('subtotal');
+```
+
+```php
+$totalTax = ShopCartFacade::total('tax');
 ```
 
 ## Testing
