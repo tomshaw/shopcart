@@ -10,7 +10,7 @@ use TomShaw\ShopCart\Helpers\Helpers;
 final class ShopCartItem
 {
     /**
-     * An readonly property used to items.
+     * The cart item key.
      */
     public readonly int $rowId;
 
