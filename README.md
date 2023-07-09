@@ -52,7 +52,7 @@ $cartItem->color = 'black';
 ShopCartFacade::update($cartItem);
 ```
 
-Removing an item from the shoping cart.
+Removing an item from the shopping cart.
 
 ```php
 ShopCartFacade::remove(ShopCartFacade::get($rowId));
@@ -66,7 +66,7 @@ ShopCartFacade::forget();
 
 ### Collection Proxy Methods.
 
-Fetching an item from the shoping cart by `rowId`.
+Fetching an item from the shopping cart by `rowId`.
 
 ```php
 $cartItem = ShopCartFacade::get($rowId);
