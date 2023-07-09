@@ -27,7 +27,7 @@ php artisan vendor:publish --provider="TomShaw\ShopCart\ShopCartServiceProvider"
 
 ## Basic Usage
 
-Adding an item to the shoping cart.
+Adding an item to the shopping cart.
 
 > Note: Cart item constructor properties are validated when creating or updating cart items. 
 
