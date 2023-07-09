@@ -27,7 +27,7 @@ php artisan vendor:publish --provider="TomShaw\ShopCart\ShopCartServiceProvider"
 
 ## Basic Usage
 
-Adding an item to the shoping cart.
+Adding an item to the shopping cart.
 
 > Note: Cart item constructor properties are validated when creating or updating cart items. 
 
@@ -52,7 +52,7 @@ $cartItem->color = 'black';
 ShopCartFacade::update($cartItem);
 ```
 
-Removing an item from the shoping cart.
+Removing an item from the shopping cart.
 
 ```php
 ShopCartFacade::remove(ShopCartFacade::get($rowId));
@@ -95,13 +95,13 @@ ShopCartFacade::add($cartItem);
 
 ### Proxy Methods
 
-Fetching an item from the shoping cart by `rowId`.
+Fetching an item from the shopping cart by `rowId`.
 
 ```php
 $cartItem = ShopCartFacade::get($rowId);
 ```
 
-Checking if an item exists in the shoppng cart by `rowId`.
+Checking if an item exists in the shopping cart by `rowId`.
 
 ```php
 $boolean = ShopCartFacade::has($rowId);
