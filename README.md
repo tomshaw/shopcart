@@ -27,49 +27,19 @@ php artisan vendor:publish --provider="TomShaw\ShopCart\ShopCartServiceProvider"
 
 ## Basic Usage
 
-Add item to the cart.
+Adding an item to the shoping cart.
 
-```php
-ShopCartFacade::add(
-    ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price)
-);
-```
+> Note: Cart item constructor properties are validated when creating or updating cart items. 
 
-Add miscellaneous options to cart items.
+> Note: A unique random integer `rowId` is created used to identify cart items.
 
 ```php
 $cartItem = ShopCartItem::create($product->id, $product->name, 1, $product->price);
 
-$cartItem->size = 'XL';
-$cartItem->color = 'blue';
-
 ShopCartFacade::add($cartItem);
 ```
 
-Adding item specific tax rates.
-
-> Note: This overrides the default tax rate set in the cart configuration.
-
-```php
-$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price, tax: 6.250);
-
-ShopCartFacade::add($cartItem);
-```
-
-Updating items in the shopping cart.
-
-> Note: Constructor properties are validated when adding or updating cart items.
-
-```php
-$cartItem = ShopCartFacade::get($rowId);
-
-$cartItem->quantity = 2; 
-
-$cartItem->size = '2XL';
-$cartItem->color = 'black';
-
-ShopCartFacade::update($cartItem);
-```
+Updating an item and option attributes in the shoping cart.
 
 ```php
 $cartItem = ShopCartFacade::where('id', '===', $id)->first();
@@ -82,29 +52,33 @@ $cartItem->color = 'black';
 ShopCartFacade::update($cartItem);
 ```
 
-Removing items from the shopping cart.
+Removing an item from the shoping cart.
 
 ```php
 ShopCartFacade::remove(ShopCartFacade::get($rowId));
 ```
 
+Deleting the shopping cart after checkout.
+
 ```php
-ShopCartFacade::remove(ShopCartFacade::where('id', '===', $id)->first());
+ShopCartFacade::forget();
 ```
 
-Return an item from the cart by `rowId`.
+### Collection Proxy Methods.
+
+Fetching an item from the shoping cart by `rowId`.
 
 ```php
 $cartItem = ShopCartFacade::get($rowId);
 ```
 
-Checking if an item exists in the cart by `rowId`.
+Checking if an item exists in the shoppng cart by `rowId`.
 
 ```php
 $boolean = ShopCartFacade::has($rowId);
 ```
 
-Fetching the cart collection.
+Fetching the cart entire collection.
 
 ```php
 $cartItems = ShopCartFacade::all();
@@ -114,7 +88,7 @@ $cartItems = ShopCartFacade::all();
 $cartItems = ShopCartFacade::get();
 ```
 
-Searching for cart items.
+Searching for specific cart items.
 
 ```php
 $cartItems = ShopCartFacade::where('id', '===', $productId);
@@ -130,12 +104,6 @@ ShopCartFacade::isEmpty();
 ShopCartFacade::isNotEmpty();
 ```
 
-Emptying the shopping cart.
-
-```php
-ShopCartFacade::forget();
-```
-
 Casting the cart as an `array` or `json`;
 
 ```php
@@ -148,9 +116,7 @@ ShopCartFacade::toJson();
 
 ## Cart Totals.
 
-> The total method sums properties: `tax`, `price`, `subtotal` and `quantity`. 
-
-> Note: When no property is specified the cart total `price` is returned.
+> The total method sums properties: `tax`, `price`, `subtotal` and `quantity`. When no property is specified the total cart `price` is returned.
 
 ```php
 $totalPrice = ShopCartFacade::total('price');
@@ -165,6 +131,16 @@ $subTotal = ShopCartFacade::total('subtotal');
 
 ```php
 $totalTax = ShopCartFacade::total('tax');
+```
+
+## Tax Rates.
+
+> Note: This overrides the default tax rate set in the cart configuration.
+
+```php
+$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price, tax: 6.250);
+
+ShopCartFacade::add($cartItem);
 ```
 
 ## Testing
