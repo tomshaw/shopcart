@@ -64,7 +64,36 @@ Deleting the shopping cart after checkout.
 ShopCartFacade::forget();
 ```
 
-### Collection Proxy Methods.
+## Cart Totals
+
+> The total method sums properties: `tax`, `price`, `subtotal` and `quantity`. When no property is specified the total cart `price` is returned.
+
+```php
+$totalPrice = ShopCartFacade::total('price');
+```
+```php
+$totalQuantity = ShopCartFacade::total(property: 'quantity', numberFormat: false);
+```
+
+```php
+$subTotal = ShopCartFacade::total('subtotal');
+```
+
+```php
+$totalTax = ShopCartFacade::total('tax');
+```
+
+## Tax Rates
+
+> Note: This overrides the default tax rate set in the cart configuration.
+
+```php
+$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price, tax: 6.250);
+
+ShopCartFacade::add($cartItem);
+```
+
+### Proxy Methods
 
 Fetching an item from the shoping cart by `rowId`.
 
@@ -94,7 +123,7 @@ Searching for specific cart items.
 $cartItems = ShopCartFacade::where('id', '===', $productId);
 ```
 
-Checking if the shopping cart is empty or not.
+Check if the cart is empty or not.
 
 ```php
 ShopCartFacade::isEmpty();
@@ -112,35 +141,6 @@ ShopCartFacade::toArray();
 
 ```php
 ShopCartFacade::toJson();
-```
-
-## Cart Totals.
-
-> The total method sums properties: `tax`, `price`, `subtotal` and `quantity`. When no property is specified the total cart `price` is returned.
-
-```php
-$totalPrice = ShopCartFacade::total('price');
-```
-```php
-$totalQuantity = ShopCartFacade::total(property: 'quantity', numberFormat: false);
-```
-
-```php
-$subTotal = ShopCartFacade::total('subtotal');
-```
-
-```php
-$totalTax = ShopCartFacade::total('tax');
-```
-
-## Tax Rates.
-
-> Note: This overrides the default tax rate set in the cart configuration.
-
-```php
-$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price, tax: 6.250);
-
-ShopCartFacade::add($cartItem);
 ```
 
 ## Testing
