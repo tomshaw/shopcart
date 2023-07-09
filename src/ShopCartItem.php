@@ -2,39 +2,30 @@
 
 namespace TomShaw\ShopCart;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Collection;
-
-use TomShaw\ShopCart\Helpers\Helpers;
+use Illuminate\Support\Facades\Validator;
 use TomShaw\ShopCart\Exceptions\InvalidItemException;
+use TomShaw\ShopCart\Helpers\Helpers;
 
 final class ShopCartItem
 {
     /**
      * An readonly property used to items.
-     *
-     * @var int
      */
     public readonly int $rowId;
 
     /**
      * The cart item subtotal.
-     *
-     * @var float
      */
     public float $subTotal;
 
     /**
      * The cart item total tax.
-     *
-     * @var float
      */
     public float $totalTax;
 
     /**
      * The cart item total price.
-     *
-     * @var float
      */
     public float $totalPrice;
 
@@ -54,12 +45,7 @@ final class ShopCartItem
     /**
      * Create a new cart item instance.
      *
-     * @param  int  $id
-     * @param  string  $name
-     * @param  int  $quantity
-     * @param  float  $price
      * @param  int|null  $tax
-     * @param  \Illuminate\Support\Collection  $options
      * @return void
      */
     public function __construct(
@@ -75,9 +61,6 @@ final class ShopCartItem
 
     /**
      * Dynamically access a value.
-     *
-     * @param  string  $key
-     * @return mixed
      */
     public function __get(string $key): mixed
     {
@@ -86,10 +69,6 @@ final class ShopCartItem
 
     /**
      * Dynamically set a value.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     * @return void
      */
     public function __set(string $key, mixed $value): void
     {
@@ -98,9 +77,6 @@ final class ShopCartItem
 
     /**
      * Dynamically check if value is set.
-     *
-     * @param  string  $key
-     * @return bool
      */
     public function __isset(string $key): bool
     {
@@ -109,9 +85,6 @@ final class ShopCartItem
 
     /**
      * Dynamically unset a value.
-     *
-     * @param  string  $key
-     * @return void
      */
     public function __unset(string $key): void
     {
@@ -120,11 +93,7 @@ final class ShopCartItem
 
     /**
      * Create a new cart item.
-     * 
-     * @param  int  $id
-     * @param  string  $name
-     * @param  int  $quantity
-     * @param  float  $price
+     *
      * @param  float|null  $tax
      * @return \TomShaw\ShopCart\ShopCartItem
      */
@@ -137,7 +106,7 @@ final class ShopCartItem
 
     /**
      * Validate cart properties.
-     * 
+     *
      * @param  int  $id
      * @param  string  $name
      * @param  int  $quantity
@@ -158,15 +127,15 @@ final class ShopCartItem
 
     /**
      * Validate a cart property.
-     * 
+     *
      * @param  string  $name
      * @param  mixed  $value
      * @return \Illuminate\Validation\Validator
      */
     public static function validateItem($name, $value)
     {
-        if (!in_array($name, array_keys(self::$rules))) {
-            throw new InvalidItemException("Invalid property name.");
+        if (! in_array($name, array_keys(self::$rules))) {
+            throw new InvalidItemException('Invalid property name.');
         }
 
         $validator = Validator::make([$name => $value], [$name => self::$rules[$name]]);
@@ -180,8 +149,6 @@ final class ShopCartItem
 
     /**
      * Calculates cart item totals.
-     * 
-     * @return void
      */
     public function process(): void
     {
@@ -192,8 +159,6 @@ final class ShopCartItem
 
     /**
      * Get the subtotal.
-     * 
-     * @return float
      */
     public function getSubTotal(): float
     {
@@ -202,8 +167,6 @@ final class ShopCartItem
 
     /**
      * Get the total tax.
-     * 
-     * @return float
      */
     public function getTotalTax(): float
     {
@@ -212,8 +175,6 @@ final class ShopCartItem
 
     /**
      * Get the total price.
-     * 
-     * @return float
      */
     public function getTotalPrice(): float
     {
@@ -222,12 +183,11 @@ final class ShopCartItem
 
     /**
      * Get the calculated tax.
-     * 
-     * @return float
      */
     public function getCalculatedTaxRate($roundFloat = true, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
     {
         $float = (($this->getTotalPrice() - $this->getSubTotal()) / $this->getSubTotal()) * 100;
+
         return $roundFloat ? Helpers::round($float, $precision, $mode) : $float;
     }
 }

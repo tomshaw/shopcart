@@ -2,10 +2,9 @@
 
 namespace TomShaw\ShopCart;
 
-use Illuminate\Session\SessionManager;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
-
 use TomShaw\ShopCart\Contracts\ShopCartInterface;
 use TomShaw\ShopCart\Exceptions\InvalidItemException;
 use TomShaw\ShopCart\Helpers\Helpers;
@@ -14,19 +13,15 @@ final class ShopCart implements ShopCartInterface
 {
     /**
      * The session storage key.
-     *
-     * @var string
      */
     private string $sessionKey = 'shopcart.default';
 
     /**
      * Create a new cart instance.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-     * @param  \Illuminate\Session\SessionManager  $session
      * @return void
      */
-    function __construct(
+    public function __construct(
         private Dispatcher $events,
         private SessionManager $session
     ) {
@@ -34,8 +29,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Retrieve the cart collection.
-     * 
-     * @return \Illuminate\Support\Collection
      */
     protected function cart(): Collection
     {
@@ -44,8 +37,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Persists the cart collection.
-     * 
-     * @return void
      */
     protected function persist(Collection $collection): void
     {
@@ -54,8 +45,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Get all of the items in the collection.
-     * 
-     * @return array
      */
     public function all(): array
     {
@@ -64,9 +53,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Determine if an item exists in the collection by key.
-     * 
-     * @param  int  $rowId
-     * @return bool
      */
     public function has(int $rowId): bool
     {
@@ -75,11 +61,10 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Get a cart item from collection by key or entire collection.
-     * 
-     * @param  int|null  $rowId
+     *
      * @return \TomShaw\ShopCart\ShopCartItem|\Illuminate\Support\Collection
      */
-    public function get(int $rowId = null): ShopCartItem | Collection | null
+    public function get(int $rowId = null): ShopCartItem|Collection|null
     {
         if ($rowId) {
             return $this->cart()->get($rowId);
@@ -90,21 +75,19 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Filter cart items by the given key value pair.
-     * 
+     *
      * @param  string  $key
      * @param  mixed  $operator
      * @param  mixed  $value
      * @return \TomShaw\ShopCart\ShopCartItem
      */
-    public function where($key, $operator, $value): null | Collection
+    public function where($key, $operator, $value): null|Collection
     {
         return $this->cart()->where($key, $operator, $value);
     }
 
     /**
      * Determine if the cart collection is not empty.
-     * 
-     * @return bool
      */
     public function isNotEmpty(): bool
     {
@@ -113,8 +96,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Determine if the cart collection is empty.
-     * 
-     * @return bool
      */
     public function isEmpty(): bool
     {
@@ -123,14 +104,13 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Determine cart totals supports "tax", "price", "subtotal" and "quantity".
-     * 
+     *
      * @param  string  $property tax, price, subtotal and quantity
      * @param  int|null  $decimals
      * @param  null|string  $decimalSeperator
      * @param  null|string  $thousandsSeperator
-     * @return int|float|string
      */
-    public function total(string $property, $decimals = null, $decimalPoint = null, $thousandSeperator = null, $numberFormat = true): int | float | string
+    public function total(string $property, $decimals = null, $decimalPoint = null, $thousandSeperator = null, $numberFormat = true): int|float|string
     {
         $found = match ($property) {
             'tax' => 'totalTax',
@@ -147,8 +127,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Get collection items as JSON.
-     * 
-     * @return string
      */
     public function toJson(): string
     {
@@ -157,8 +135,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Get collection items as plain array.
-     * 
-     * @return array
      */
     public function toArray(): array
     {
@@ -167,13 +143,13 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Add a cart item to the collection.
-     * 
+     *
      * @param  \TomShaw\ShopCart\ShopCartItem
      * @return \TomShaw\ShopCart\ShopCartItem
      */
     public function add(ShopCartItem $cartItem): ShopCartItem
     {
-        if (!$cartItem->tax) {
+        if (! $cartItem->tax) {
             $cartItem->tax = floatval(config('shopcart.default.tax'));
         }
 
@@ -190,7 +166,7 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Update an existing cart item.
-     * 
+     *
      * @param  \TomShaw\ShopCart\ShopCartItem
      * @return \TomShaw\ShopCart\ShopCartItem
      */
@@ -211,14 +187,14 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Remove a cart item from the collection.
-     * 
+     *
      * @param  \TomShaw\ShopCart\ShopCartItem
      * @return \TomShaw\ShopCart\ShopCartItem
      */
     public function remove(ShopCartItem $cartItem): ShopCartItem
     {
-        if (!$this->has($cartItem->rowId)) {
-            throw new InvalidItemException("Cart item not found.");
+        if (! $this->has($cartItem->rowId)) {
+            throw new InvalidItemException('Cart item not found.');
         }
 
         $collection = $this->cart()->forget($cartItem->rowId);
@@ -232,8 +208,6 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Remove cart session.
-     * 
-     * @return void
      */
     public function forget(): void
     {

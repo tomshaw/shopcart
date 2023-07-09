@@ -2,19 +2,21 @@
 
 namespace TomShaw\ShopCart\Tests;
 
-use TomShaw\ShopCart\Tests\TestCase;
-
-use TomShaw\ShopCart\ShopCartItem;
+use TomShaw\ShopCart\Exceptions\InvalidItemException;
 use TomShaw\ShopCart\Facades\ShopCartFacade;
 use TomShaw\ShopCart\Helpers\Helpers;
-use TomShaw\ShopCart\Exceptions\InvalidItemException;
+use TomShaw\ShopCart\ShopCartItem;
 
 class ShopCartTest extends TestCase
 {
     protected ShopCartItem $cartItemA;
+
     protected ShopCartItem $cartItemB;
+
     protected ShopCartItem $cartItemC;
+
     protected ShopCartItem $cartItemD;
+
     protected ShopCartItem $cartItemE;
 
     public function setup(): void
@@ -32,14 +34,14 @@ class ShopCartTest extends TestCase
     {
         $this->expectException(InvalidItemException::class);
 
-        ShopCartFacade::add(ShopCartItem::create(1, "", 1, 1.00));
+        ShopCartFacade::add(ShopCartItem::create(1, '', 1, 1.00));
     }
 
     public function test_cart_should_throw_exception_when_provided_invalid_quantity()
     {
         $this->expectException(InvalidItemException::class);
 
-        ShopCartFacade::add(ShopCartItem::create(1, "Test Item", 0, 1.00));
+        ShopCartFacade::add(ShopCartItem::create(1, 'Test Item', 0, 1.00));
     }
 
     public function test_cart_get_method_returns_correct_data(): void
@@ -60,28 +62,26 @@ class ShopCartTest extends TestCase
 
     public function test_cart_should_convert_prices_to_float_values(): void
     {
-        $cartItem = ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 0.95);
+        $cartItem = ShopCartFacade::add(ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 0.95));
 
-        $this->assertIsFloat($cartItem->price);
-        $this->assertEquals($cartItem->price, 0.95);
+        $this->assertIsFloat(ShopCartFacade::get($cartItem->rowId)->price);
+        $this->assertEquals(ShopCartFacade::get($cartItem->rowId)->price, 0.95);
 
-        $cartItem = ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1);
+        $cartItem = ShopCartFacade::add(ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1));
 
-        $this->assertIsFloat($cartItem->price);
-        $this->assertEquals($cartItem->price, 1.00);
+        $this->assertEquals(ShopCartFacade::get($cartItem->rowId)->price, 1.00);
 
-        $cartItem = ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1.95);
+        $cartItem = ShopCartFacade::add(ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1.95));
 
-        $this->assertIsFloat($cartItem->price);
-        $this->assertEquals($cartItem->price, 1.95);
+        $this->assertEquals(ShopCartFacade::get($cartItem->rowId)->price, 1.95);
 
-        $cartItem = ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1295);
+        $cartItem = ShopCartFacade::add(ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1295));
 
-        $this->assertEquals(Helpers::numberFormat($cartItem->price), "1,295.00");
+        $this->assertEquals(Helpers::numberFormat(ShopCartFacade::get($cartItem->rowId)->price), '1,295.00');
 
-        $cartItem = ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1299.95);
+        $cartItem = ShopCartFacade::add(ShopCartItem::create(id: 1, name: 'ShopCart Item', quantity: 1, price: 1299.95));
 
-        $this->assertEquals(Helpers::numberFormat($cartItem->price), "1,299.95");
+        $this->assertEquals(Helpers::numberFormat(ShopCartFacade::get($cartItem->rowId)->price), '1,299.95');
     }
 
     public function test_cart_should_update_and_return_correct_cart_totals(): void

@@ -11,12 +11,12 @@ class ShopCartServiceProvider extends ServiceProvider
         $this->app->bind('shopcart', ShopCart::class);
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([__DIR__ . '/../config/cart.php' => config_path('shopcart.php')], 'config');
+            $this->publishes([__DIR__.'/../config/cart.php' => config_path('shopcart.php')], 'config');
         }
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/cart.php', 'shopcart');
+        $this->mergeConfigFrom(__DIR__.'/../config/cart.php', 'shopcart');
     }
 }

@@ -3,7 +3,6 @@
 namespace TomShaw\ShopCart\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-
 use TomShaw\ShopCart\ShopCartServiceProvider;
 
 class TestCase extends Orchestra
