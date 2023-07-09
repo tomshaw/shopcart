@@ -116,7 +116,7 @@ $cartItems = ShopCartFacade::all();
 Fetch the cart collection as collection.
 
 ```php
-$cartItems = ShopCartFacade::cart();
+$cartItems = ShopCartFacade::get();
 ```
 
 Searching for specific cart items.
