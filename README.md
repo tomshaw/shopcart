@@ -72,7 +72,7 @@ Fetching an item from the shoping cart by `rowId`.
 $cartItem = ShopCartFacade::get($rowId);
 ```
 
-Checking if an item exists in the shoppng cart by `rowId`.
+Checking if an item exists in the shopping cart by `rowId`.
 
 ```php
 $boolean = ShopCartFacade::has($rowId);
