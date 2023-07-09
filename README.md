@@ -107,14 +107,16 @@ Checking if an item exists in the shopping cart by `rowId`.
 $boolean = ShopCartFacade::has($rowId);
 ```
 
-Fetching the cart entire collection.
+Fetch the cart collection as array.
 
 ```php
 $cartItems = ShopCartFacade::all();
 ```
 
+Fetch the cart collection as collection.
+
 ```php
-$cartItems = ShopCartFacade::get();
+$cartItems = ShopCartFacade::cart();
 ```
 
 Searching for specific cart items.

@@ -45,7 +45,7 @@ final class ShopCartItem
     /**
      * Create a new cart item instance.
      *
-     * @param  int|null  $tax
+     * @param  float|null  $tax
      * @return void
      */
     public function __construct(
@@ -110,8 +110,8 @@ final class ShopCartItem
      * @param  int  $id
      * @param  string  $name
      * @param  int  $quantity
-     * @param  int  $price
-     * @param  int|null  $tax
+     * @param  float  $price
+     * @param  float|null  $tax
      * @return \Illuminate\Validation\Validator
      */
     public static function validate($id, $name, $quantity, $price, $tax = null)
@@ -183,6 +183,8 @@ final class ShopCartItem
 
     /**
      * Get the calculated tax.
+     *
+     * @param  bool  $roundFloat
      */
     public function getCalculatedTaxRate($roundFloat = true, int $precision = 0, int $mode = PHP_ROUND_HALF_UP): float
     {

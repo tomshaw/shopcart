@@ -28,15 +28,15 @@ final class ShopCart implements ShopCartInterface
     }
 
     /**
-     * Retrieve the cart collection.
+     * Get all of the items in the collection.
      */
-    protected function cart(): Collection
+    public function cart(): Collection
     {
-        return $this->session->get($this->sessionKey) ?? new Collection;
+        return $this->session->get($this->sessionKey) ?? new Collection();
     }
 
     /**
-     * Persists the cart collection.
+     * Persists cart collection.
      */
     protected function persist(Collection $collection): void
     {
@@ -60,11 +60,11 @@ final class ShopCart implements ShopCartInterface
     }
 
     /**
-     * Get a cart item from collection by key or entire collection.
+     * Get a cart item by key.
      *
      * @return \TomShaw\ShopCart\ShopCartItem|\Illuminate\Support\Collection
      */
-    public function get(int $rowId = null): ShopCartItem|Collection|null
+    public function get(int $rowId = null): mixed
     {
         if ($rowId) {
             return $this->cart()->get($rowId);
@@ -79,9 +79,8 @@ final class ShopCart implements ShopCartInterface
      * @param  string  $key
      * @param  mixed  $operator
      * @param  mixed  $value
-     * @return \TomShaw\ShopCart\ShopCartItem
      */
-    public function where($key, $operator, $value): null|Collection
+    public function where($key, $operator, $value): Collection
     {
         return $this->cart()->where($key, $operator, $value);
     }
@@ -106,11 +105,11 @@ final class ShopCart implements ShopCartInterface
      * Determine cart totals supports "tax", "price", "subtotal" and "quantity".
      *
      * @param  string  $property tax, price, subtotal and quantity
-     * @param  int|null  $decimals
-     * @param  null|string  $decimalSeperator
-     * @param  null|string  $thousandsSeperator
+     * @param  int  $decimals
+     * @param  string  $decimalSeperator
+     * @param  string  $thousandsSeperator
      */
-    public function total(string $property, $decimals = null, $decimalPoint = null, $thousandSeperator = null, $numberFormat = true): int|float|string
+    public function total(string $property, int $decimals = null, string $decimalSeperator = null, string $thousandsSeperator = null, bool $numberFormat = true): mixed
     {
         $found = match ($property) {
             'tax' => 'totalTax',
@@ -122,7 +121,7 @@ final class ShopCart implements ShopCartInterface
 
         $result = $this->cart()->sum($found);
 
-        return ($numberFormat) ? Helpers::numberFormat($result, $decimals, $decimalPoint, $thousandSeperator) : $result;
+        return ($numberFormat) ? Helpers::numberFormat($result, $decimals, $decimalSeperator, $thousandsSeperator) : $result;
     }
 
     /**
@@ -135,6 +134,8 @@ final class ShopCart implements ShopCartInterface
 
     /**
      * Get collection items as plain array.
+     *
+     * return array
      */
     public function toArray(): array
     {
@@ -144,7 +145,7 @@ final class ShopCart implements ShopCartInterface
     /**
      * Add a cart item to the collection.
      *
-     * @param  \TomShaw\ShopCart\ShopCartItem
+     * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
      * @return \TomShaw\ShopCart\ShopCartItem
      */
     public function add(ShopCartItem $cartItem): ShopCartItem
@@ -167,7 +168,7 @@ final class ShopCart implements ShopCartInterface
     /**
      * Update an existing cart item.
      *
-     * @param  \TomShaw\ShopCart\ShopCartItem
+     * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
      * @return \TomShaw\ShopCart\ShopCartItem
      */
     public function update(ShopCartItem $cartItem): ShopCartItem
@@ -188,7 +189,7 @@ final class ShopCart implements ShopCartInterface
     /**
      * Remove a cart item from the collection.
      *
-     * @param  \TomShaw\ShopCart\ShopCartItem
+     * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
      * @return \TomShaw\ShopCart\ShopCartItem
      */
     public function remove(ShopCartItem $cartItem): ShopCartItem

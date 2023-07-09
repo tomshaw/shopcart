@@ -7,19 +7,19 @@ class Helpers
     /**
      * Format a number with grouped thousands.
      *
-     * @param  float  $num — The number being formatted.
-     * @param  int  $decimals — [optional] Sets the number of decimal points.
-     * @param  string|null  $decimal_separator — [optional]
-     * @param  string|null  $thousands_separator — [optional]
+     * @param  mixed  $value — The number being formatted.
+     * @param  int|null  $decimals — [optional] Sets the number of decimal points.
+     * @param  string|null  $decimalSeparator — [optional]
+     * @param  string|null  $thousandsSeperator — [optional]
      * @return string — A formatted version of number.
      */
-    public static function numberFormat($value, int $decimals = null, ?string $decimalSeperator = null, ?string $thousandsSeperator = null): string
+    public static function numberFormat(mixed $value, int $decimals = null, ?string $decimalSeparator = null, ?string $thousandsSeperator = null): string
     {
         $decimals = $decimals ?: config('shopcart.number_format.decimals');
-        $decimalSeperator = $decimalSeperator ?: config('shopcart.number_format.decimal_seperator');
+        $decimalSeparator = $decimalSeparator ?: config('shopcart.number_format.decimal_seperator');
         $thousandsSeperator = $thousandsSeperator ?: config('shopcart.number_format.thousands_seperator');
 
-        return number_format($value, $decimals, $decimalSeperator, $thousandsSeperator);
+        return number_format($value, $decimals, $decimalSeparator, $thousandsSeperator);
     }
 
     /**
