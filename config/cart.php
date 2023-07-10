@@ -10,7 +10,7 @@ return [
     |
     */
     'default' => [
-        'tax' => env('SHOPCART_DEFAULT_TAX', 8.25),
+        'tax' => env('SHOPCART_DEFAULT_TAXRATE', 8.25),
     ],
     /*
     |--------------------------------------------------------------------------
