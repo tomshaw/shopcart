@@ -31,7 +31,7 @@ Adding an item to the shopping cart.
 
 > Note: Cart item constructor properties are validated when creating or updating cart items. 
 
-> Note: A unique random integer `rowId` is created used to identify cart items.
+> Note: A unique random integer `rowId` is created and used to identify cart items.
 
 ```php
 $cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price);
@@ -58,7 +58,7 @@ $cartItem = ShopCartFacade::where('id', '===', $id)->first();
 $cartItem->quantity = 2;
 
 $cartItem->size = '2XL';
-$cartItem->color = 'black';
+$cartItem->color = 'white';
 
 ShopCartFacade::update($cartItem);
 ```
@@ -96,7 +96,7 @@ $totalTax = ShopCartFacade::total('tax');
 
 ## Tax Rates
 
-To set a default tax rate create the following environment variable in your applications `.env`.
+To set a default tax rate add the following environment variable in your application `.env`.
 
 ```sh
 SHOPCART_DEFAULT_TAXRATE=9.547
@@ -114,7 +114,7 @@ ShopCartFacade::add($cartItem);
 
 ## Number Formatting
 
-Number formating is handled by adding the following environment variables to your applications `.env`.
+Number formating is handled by adding the following environment variables to your application `.env`.
 
 ```sh
 SHOPCART_DECIMALS=2
