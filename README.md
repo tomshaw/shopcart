@@ -34,12 +34,23 @@ Adding an item to the shopping cart.
 > Note: A unique random integer `rowId` is created used to identify cart items.
 
 ```php
-$cartItem = ShopCartItem::create($product->id, $product->name, 1, $product->price);
+$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price);
 
 ShopCartFacade::add($cartItem);
 ```
 
-Updating an item and option attributes in the shoping cart.
+Adding an item with product options to the shopping cart.
+
+```php
+$cartItem = ShopCartItem::create($product->id, $product->name, 1, $product->price);
+
+$cartItem->size = 'XL';
+$cartItem->color = 'blue';
+
+ShopCartFacade::add($cartItem);
+```
+
+Updating an item and product options in the shoping cart.
 
 ```php
 $cartItem = ShopCartFacade::where('id', '===', $id)->first();
