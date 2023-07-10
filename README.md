@@ -66,7 +66,7 @@ ShopCartFacade::forget();
 
 ## Cart Totals
 
-> The total method sums properties: `tax`, `price`, `subtotal` and `quantity`. When no property is specified the total cart `price` is returned.
+> Sums the properties: `tax`, `price`, `subtotal` and `quantity`.
 
 ```php
 $totalPrice = ShopCartFacade::total('price');
@@ -85,12 +85,30 @@ $totalTax = ShopCartFacade::total('tax');
 
 ## Tax Rates
 
-> Note: This overrides the default tax rate set in the cart configuration.
+To set a default tax rate create the following environment variable in your applications `.env`.
+
+```sh
+SHOPCART_DEFAULT_TAXRATE=9.547
+```
+
+Applying item specific taxe rates.
+
+> Note: This overrides the default tax rate set in your cart configuration.
 
 ```php
-$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price, tax: 6.250);
+$cartItem = ShopCartItem::create(tax: 6.250, ...);
 
 ShopCartFacade::add($cartItem);
+```
+
+## Number Formatting
+
+Number formating is handled by adding the following environment variables to your applications `.env`.
+
+```sh
+SHOPCART_DECIMALS=2
+SHOPCART_DECIMAL_SEPARATOR="."
+SHOPCART_THOUSANDS_SEPARATOR=","
 ```
 
 ### Proxy Methods
