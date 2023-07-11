@@ -1,4 +1,4 @@
-name: PHP Code Linting
+name: Code Linting
 
 on:
   push:
