@@ -102,7 +102,7 @@ To set a default tax rate add the following environment variable in your applica
 SHOPCART_DEFAULT_TAXRATE=9.547
 ```
 
-Applying item specific taxe rates.
+Applying item specific tax rates.
 
 > Note: This overrides the default tax rate set in your cart configuration.
 
