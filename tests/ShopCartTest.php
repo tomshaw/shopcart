@@ -2,6 +2,8 @@
 
 namespace TomShaw\ShopCart\Tests;
 
+use Illuminate\Support\Facades\Event;
+use TomShaw\ShopCart\Events\ShopCartEvent;
 use TomShaw\ShopCart\Exceptions\InvalidItemException;
 use TomShaw\ShopCart\Facades\ShopCartFacade;
 use TomShaw\ShopCart\Helpers\Helpers;
@@ -134,6 +136,51 @@ class ShopCartTest extends TestCase
         ShopCartFacade::remove($cartItem);
 
         $this->assertFalse(ShopCartFacade::has($cartItem->rowId));
+    }
+
+    public function test_cart_should_dispatch_shop_cart_events(): void
+    {
+        Event::fake();
+
+        $cartItem = ShopCartFacade::add(ShopCartItem::create(10, 'Socks', 1, 10.00));
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) {
+            return $event->method === 'add';
+        });
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) use ($cartItem) {
+            return $event->cartItem->id === $cartItem->id;
+        });
+
+        ShopCartFacade::update($cartItem);
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) {
+            return $event->method === 'update';
+        });
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) use ($cartItem) {
+            return $event->cartItem->id === $cartItem->id;
+        });
+
+        ShopCartFacade::remove($cartItem);
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) {
+            return $event->method === 'remove';
+        });
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) use ($cartItem) {
+            return $event->cartItem->id === $cartItem->id;
+        });
+
+        ShopCartFacade::forget();
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) {
+            return $event->method === 'forget';
+        });
+
+        Event::assertDispatched(ShopCartEvent::class, function ($event) {
+            return $event->cartItem === null;
+        });
     }
 
     public function test_cart_should_empty(): void

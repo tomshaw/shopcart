@@ -66,22 +66,22 @@ interface ShopCartInterface
     public function toArray(): array;
 
     /**
-     * Add a cart item to the collection.
+     * Add cart item to collection.
      */
     public function add(ShopCartItem $cartItem): ShopCartItem;
 
     /**
-     * Update an existing cart item.
+     * Update cart item in collection.
      */
     public function update(ShopCartItem $cartItem): ShopCartItem;
 
     /**
-     * Remove a cart item from the collection.
+     * Remove cart item from collection.
      */
     public function remove(ShopCartItem $cartItem): ShopCartItem;
 
     /**
-     * Remove cart session.
+     * Forget cart session.
      */
     public function forget(): void;
 }

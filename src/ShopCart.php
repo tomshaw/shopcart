@@ -2,10 +2,10 @@
 
 namespace TomShaw\ShopCart;
 
-use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
 use TomShaw\ShopCart\Contracts\ShopCartInterface;
+use TomShaw\ShopCart\Events\ShopCartEvent;
 use TomShaw\ShopCart\Exceptions\InvalidItemException;
 use TomShaw\ShopCart\Helpers\Helpers;
 
@@ -22,7 +22,6 @@ final class ShopCart implements ShopCartInterface
      * @return void
      */
     public function __construct(
-        private Dispatcher $events,
         private SessionManager $session
     ) {
     }
@@ -143,7 +142,7 @@ final class ShopCart implements ShopCartInterface
     }
 
     /**
-     * Add a cart item to the collection.
+     * Add cart item to collection.
      *
      * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
      * @return \TomShaw\ShopCart\ShopCartItem
@@ -160,13 +159,13 @@ final class ShopCart implements ShopCartInterface
 
         $this->persist($collection);
 
-        $this->events->dispatch('shopcart.add', $cartItem->rowId);
+        event(new ShopCartEvent(method: 'add', cartItem: $cartItem));
 
         return $cartItem;
     }
 
     /**
-     * Update an existing cart item.
+     * Update cart item in collection.
      *
      * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
      * @return \TomShaw\ShopCart\ShopCartItem
@@ -181,13 +180,13 @@ final class ShopCart implements ShopCartInterface
 
         $this->persist($collection);
 
-        $this->events->dispatch('shopcart.update', $cartItem->rowId);
+        event(new ShopCartEvent(method: 'update', cartItem: $cartItem));
 
         return $cartItem;
     }
 
     /**
-     * Remove a cart item from the collection.
+     * Remove cart item from collection.
      *
      * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
      * @return \TomShaw\ShopCart\ShopCartItem
@@ -202,18 +201,18 @@ final class ShopCart implements ShopCartInterface
 
         $this->persist($collection);
 
-        $this->events->dispatch('shopcart.remove', $cartItem->rowId);
+        event(new ShopCartEvent(method: 'remove', cartItem: $cartItem));
 
         return $cartItem;
     }
 
     /**
-     * Remove cart session.
+     * Forget cart session.
      */
     public function forget(): void
     {
         $this->session->forget($this->sessionKey);
 
-        $this->events->dispatch('shopcart.empty');
+        event(new ShopCartEvent(method: 'forget', cartItem: null));
     }
 }
