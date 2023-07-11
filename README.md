@@ -124,28 +124,22 @@ SHOPCART_THOUSANDS_SEPARATOR=","
 
 ### Proxy Methods
 
-Fetching an item from the shopping cart by `rowId`.
+Get item from collection by `rowId`.
 
 ```php
 $cartItem = ShopCartFacade::get($rowId);
 ```
 
-Checking if an item exists in the shopping cart by `rowId`.
+Check if cart item exists by `rowId`.
 
 ```php
 $boolean = ShopCartFacade::has($rowId);
 ```
 
-Fetch the cart collection as array.
+Get cart as collection or array.
 
 ```php
-$cartItems = ShopCartFacade::all();
-```
-
-Fetch the cart collection as collection.
-
-```php
-$cartItems = ShopCartFacade::get();
+$cartItems = ShopCartFacade::all(bool $toArray = false);
 ```
 
 Searching for specific cart items.

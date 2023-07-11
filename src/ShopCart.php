@@ -29,7 +29,7 @@ final class ShopCart implements ShopCartInterface
     /**
      * Get all of the items in the collection.
      */
-    public function cart(): Collection
+    protected function cart(): Collection
     {
         return $this->session->get($this->sessionKey) ?? new Collection();
     }
@@ -45,9 +45,9 @@ final class ShopCart implements ShopCartInterface
     /**
      * Get all of the items in the collection.
      */
-    public function all(): array
+    public function all(bool $toArray = false): Collection|array
     {
-        return $this->cart()->all();
+        return $toArray ? $this->cart()->all() : $this->cart();
     }
 
     /**
@@ -59,17 +59,13 @@ final class ShopCart implements ShopCartInterface
     }
 
     /**
-     * Get a cart item by key.
+     * Get cart item by key.
      *
-     * @return \TomShaw\ShopCart\ShopCartItem|\Illuminate\Support\Collection
+     * @return \TomShaw\ShopCart\ShopCartItem
      */
-    public function get(int $rowId = null): mixed
+    public function get(int $rowId): ShopCartItem
     {
-        if ($rowId) {
-            return $this->cart()->get($rowId);
-        }
-
-        return $this->cart();
+        return $this->cart()->get($rowId);
     }
 
     /**

@@ -10,7 +10,7 @@ interface ShopCartInterface
     /**
      * Get all of the items in the collection.
      */
-    public function all(): array;
+    public function all(bool $toArray = false): Collection|array;
 
     /**
      * Determine if an item exists in the collection by key.
@@ -18,11 +18,9 @@ interface ShopCartInterface
     public function has(int $rowId): bool;
 
     /**
-     * Get a cart item by key.
-     *
-     * @return \TomShaw\ShopCart\ShopCartItem|\Illuminate\Support\Collection
+     * Get cart item by key.
      */
-    public function get(int $rowId = null): mixed;
+    public function get(int $rowId): ShopCartItem;
 
     /**
      * Filter cart items by the given key value pair.

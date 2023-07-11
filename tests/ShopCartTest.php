@@ -56,7 +56,7 @@ class ShopCartTest extends TestCase
 
     public function test_cart_has_method_returns_correct_boolean_value(): void
     {
-        $cartItem = ShopCartFacade::get()->random();
+        $cartItem = ShopCartFacade::all()->random();
 
         $this->assertTrue(ShopCartFacade::has($cartItem->rowId));
         $this->assertFalse(ShopCartFacade::has($cartItem->rowId - 1));
@@ -131,7 +131,7 @@ class ShopCartTest extends TestCase
 
     public function test_cart_should_delete_correct_item(): void
     {
-        $cartItem = ShopCartFacade::get()->random();
+        $cartItem = ShopCartFacade::all()->random();
 
         ShopCartFacade::remove($cartItem);
 
