@@ -17,7 +17,7 @@ composer require tomshaw/shopcart
 Publish configuration file
 
 ```
-php artisan vendor:publish --provider="TomShaw\ShopCart\ShopCartServiceProvider" --tag=config
+php artisan vendor:publish --provider="TomShaw\ShopCart\Providers\ShopCartServiceProvider" --tag=config
 ```
 
 ## Requirements
@@ -34,45 +34,47 @@ Adding an item to the shopping cart.
 > Note: A unique random integer `rowId` is created and used to identify cart items.
 
 ```php
-$cartItem = ShopCartItem::create(id: $product->id, name: $product->name, quantity: 1, price: $product->price);
+use TomShaw\ShopCart\{Cart, CartItem};
 
-ShopCartFacade::add($cartItem);
+$cartItem = CartItem::make(id: $product->id, name: $product->name, quantity: 1, price: $product->price);
+
+Cart::add($cartItem);
 ```
 
 Adding an item with product options to the shopping cart.
 
 ```php
-$cartItem = ShopCartItem::create($product->id, $product->name, 1, $product->price);
+$cartItem = CartItem::make($product->id, $product->name, 1, $product->price);
 
 $cartItem->size = 'XL';
 $cartItem->color = 'blue';
 
-ShopCartFacade::add($cartItem);
+Cart::add($cartItem);
 ```
 
 Updating an item and product options in the shoping cart.
 
 ```php
-$cartItem = ShopCartFacade::where('id', '===', $id)->first();
+$cartItem = Cart::where('id', '===', $id)->first();
 
 $cartItem->quantity = 2;
 
 $cartItem->size = '2XL';
 $cartItem->color = 'white';
 
-ShopCartFacade::update($cartItem);
+Cart::update($cartItem);
 ```
 
 Removing an item from the shopping cart.
 
 ```php
-ShopCartFacade::remove(ShopCartFacade::get($rowId));
+Cart::remove(Cart::get($rowId));
 ```
 
 Deleting the shopping cart after checkout.
 
 ```php
-ShopCartFacade::forget();
+Cart::forget();
 ```
 
 ## Cart Totals
@@ -80,18 +82,18 @@ ShopCartFacade::forget();
 > Sums the properties: `tax`, `price`, `subtotal` and `quantity`.
 
 ```php
-$totalPrice = ShopCartFacade::total('price');
+$totalPrice = Cart::total('price');
 ```
 ```php
-$totalQuantity = ShopCartFacade::total(property: 'quantity', numberFormat: false);
-```
-
-```php
-$subTotal = ShopCartFacade::total('subtotal');
+$totalQuantity = Cart::total(property: 'quantity', numberFormat: false);
 ```
 
 ```php
-$totalTax = ShopCartFacade::total('tax');
+$subTotal = Cart::total('subtotal');
+```
+
+```php
+$totalTax = Cart::total('tax');
 ```
 
 ## Tax Rates
@@ -107,9 +109,9 @@ Applying item specific tax rates.
 > Note: This overrides the default tax rate set in your cart configuration.
 
 ```php
-$cartItem = ShopCartItem::create(tax: 6.250, ...);
+use TomShaw\ShopCart\{Cart, CartItem};
 
-ShopCartFacade::add($cartItem);
+Cart::add(CartItem::make(tax: 6.250, ...));
 ```
 
 ## Number Formatting
@@ -127,45 +129,45 @@ SHOPCART_THOUSANDS_SEPARATOR=","
 Get item from collection by `rowId`.
 
 ```php
-$cartItem = ShopCartFacade::get($rowId);
+$cartItem = Cart::get($rowId);
 ```
 
 Check if cart item exists by `rowId`.
 
 ```php
-$boolean = ShopCartFacade::has($rowId);
+$boolean = Cart::has($rowId);
 ```
 
 Get cart as collection or array.
 
 ```php
-$cartItems = ShopCartFacade::all(bool $toArray = false);
+$cartItems = Cart::all(bool $toArray = false);
 ```
 
 Searching for specific cart items.
 
 ```php
-$cartItems = ShopCartFacade::where('id', '===', $productId);
+$cartItems = Cart::where('id', '===', $productId);
 ```
 
 Check if the cart is empty or not.
 
 ```php
-ShopCartFacade::isEmpty();
+Cart::isEmpty();
 ```
 
 ```php
-ShopCartFacade::isNotEmpty();
+Cart::isNotEmpty();
 ```
 
 Casting the cart as an `array` or `json`;
 
 ```php
-ShopCartFacade::toArray();
+Cart::toArray();
 ```
 
 ```php
-ShopCartFacade::toJson();
+Cart::toJson();
 ```
 
 ## Testing

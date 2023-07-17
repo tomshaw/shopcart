@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use TomShaw\ShopCart\Exceptions\InvalidItemException;
 use TomShaw\ShopCart\Helpers\Helpers;
 
-final class ShopCartItem
+final class CartItem
 {
     /**
      * The cart item key.
@@ -53,7 +53,7 @@ final class ShopCartItem
         public string $name,
         public int $quantity,
         public float $price,
-        public float|null $tax = null,
+        public ?float $tax = null,
         public Collection $options = new Collection(),
     ) {
         $this->rowId = random_int(1000000000, 9999999999);
@@ -95,9 +95,9 @@ final class ShopCartItem
      * Create a new cart item.
      *
      * @param  float|null  $tax
-     * @return \TomShaw\ShopCart\ShopCartItem
+     * @return \TomShaw\ShopCart\CartItem
      */
-    public static function create(int $id, string $name, int $quantity, float $price, float|null $tax = null): self
+    public static function make(int $id, string $name, int $quantity, float $price, float $tax = null): self
     {
         $validator = self::validate($id, $name, $quantity, $price, $tax);
 

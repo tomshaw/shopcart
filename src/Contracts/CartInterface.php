@@ -3,9 +3,9 @@
 namespace TomShaw\ShopCart\Contracts;
 
 use Illuminate\Support\Collection;
-use TomShaw\ShopCart\ShopCartItem;
+use TomShaw\ShopCart\CartItem;
 
-interface ShopCartInterface
+interface CartInterface
 {
     /**
      * Get all of the items in the collection.
@@ -20,7 +20,7 @@ interface ShopCartInterface
     /**
      * Get cart item by key.
      */
-    public function get(int $rowId): ShopCartItem;
+    public function get(int $rowId): CartItem;
 
     /**
      * Filter cart items by the given key value pair.
@@ -66,17 +66,17 @@ interface ShopCartInterface
     /**
      * Add cart item to collection.
      */
-    public function add(ShopCartItem $cartItem): ShopCartItem;
+    public function add(CartItem $cartItem): CartItem;
 
     /**
      * Update cart item in collection.
      */
-    public function update(ShopCartItem $cartItem): ShopCartItem;
+    public function update(CartItem $cartItem): CartItem;
 
     /**
      * Remove cart item from collection.
      */
-    public function remove(ShopCartItem $cartItem): ShopCartItem;
+    public function remove(CartItem $cartItem): CartItem;
 
     /**
      * Forget cart session.

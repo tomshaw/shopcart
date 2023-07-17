@@ -13,7 +13,7 @@ class Helpers
      * @param  string|null  $thousandsSeperator — [optional]
      * @return string — A formatted version of number.
      */
-    public static function numberFormat(mixed $value, int $decimals = null, ?string $decimalSeparator = null, ?string $thousandsSeperator = null): string
+    public static function numberFormat(mixed $value, int $decimals = null, string $decimalSeparator = null, string $thousandsSeperator = null): string
     {
         $decimals = $decimals ?: config('shopcart.number_format.decimals');
         $decimalSeparator = $decimalSeparator ?: config('shopcart.number_format.decimal_seperator');

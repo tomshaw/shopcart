@@ -2,13 +2,13 @@
 
 namespace TomShaw\ShopCart\Events;
 
-use TomShaw\ShopCart\ShopCartItem;
+use TomShaw\ShopCart\CartItem;
 
 class ShopCartEvent
 {
     public function __construct(
         public string $method,
-        public ShopCartItem|null $cartItem
+        public ?CartItem $cartItem
     ) {
     }
 }

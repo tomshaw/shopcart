@@ -4,12 +4,12 @@ namespace TomShaw\ShopCart;
 
 use Illuminate\Session\SessionManager;
 use Illuminate\Support\Collection;
-use TomShaw\ShopCart\Contracts\ShopCartInterface;
+use TomShaw\ShopCart\Contracts\CartInterface;
 use TomShaw\ShopCart\Events\ShopCartEvent;
 use TomShaw\ShopCart\Exceptions\InvalidItemException;
 use TomShaw\ShopCart\Helpers\Helpers;
 
-final class ShopCart implements ShopCartInterface
+final class CartManager implements CartInterface
 {
     /**
      * The session storage key.
@@ -61,9 +61,9 @@ final class ShopCart implements ShopCartInterface
     /**
      * Get cart item by key.
      *
-     * @return \TomShaw\ShopCart\ShopCartItem
+     * @return \TomShaw\ShopCart\CartItem
      */
-    public function get(int $rowId): ShopCartItem
+    public function get(int $rowId): CartItem
     {
         return $this->cart()->get($rowId);
     }
@@ -140,10 +140,10 @@ final class ShopCart implements ShopCartInterface
     /**
      * Add cart item to collection.
      *
-     * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
-     * @return \TomShaw\ShopCart\ShopCartItem
+     * @param  \TomShaw\ShopCart\CartItem  $cartItem
+     * @return \TomShaw\ShopCart\CartItem
      */
-    public function add(ShopCartItem $cartItem): ShopCartItem
+    public function add(CartItem $cartItem): CartItem
     {
         if (! $cartItem->tax) {
             $cartItem->tax = floatval(config('shopcart.default.tax'));
@@ -163,12 +163,12 @@ final class ShopCart implements ShopCartInterface
     /**
      * Update cart item in collection.
      *
-     * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
-     * @return \TomShaw\ShopCart\ShopCartItem
+     * @param  \TomShaw\ShopCart\CartItem  $cartItem
+     * @return \TomShaw\ShopCart\CartItem
      */
-    public function update(ShopCartItem $cartItem): ShopCartItem
+    public function update(CartItem $cartItem): CartItem
     {
-        ShopCartItem::validate($cartItem->id, $cartItem->name, $cartItem->quantity, $cartItem->price, $cartItem->tax);
+        CartItem::validate($cartItem->id, $cartItem->name, $cartItem->quantity, $cartItem->price, $cartItem->tax);
 
         $cartItem->process();
 
@@ -184,10 +184,10 @@ final class ShopCart implements ShopCartInterface
     /**
      * Remove cart item from collection.
      *
-     * @param  \TomShaw\ShopCart\ShopCartItem  $cartItem
-     * @return \TomShaw\ShopCart\ShopCartItem
+     * @param  \TomShaw\ShopCart\CartItem  $cartItem
+     * @return \TomShaw\ShopCart\CartItem
      */
-    public function remove(ShopCartItem $cartItem): ShopCartItem
+    public function remove(CartItem $cartItem): CartItem
     {
         if (! $this->has($cartItem->rowId)) {
             throw new InvalidItemException('Cart item not found.');

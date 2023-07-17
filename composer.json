@@ -48,11 +48,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TomShaw\\ShopCart\\ShopCartServiceProvider"
-            ],
-            "aliases": {
-                "ShopCart": "TomShaw\\ShopCart\\Facades\\ShopCartFacade"
-            }
+                "TomShaw\\ShopCart\\Providers\\CartServiceProvider"
+            ]
         }
     },
     "minimum-stability" : "dev",
