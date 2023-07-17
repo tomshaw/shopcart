@@ -48,7 +48,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TomShaw\\ShopCart\\Providers\\CartServiceProvider"
+                "TomShaw\\ShopCart\\Providers\\ShopCartServiceProvider"
             ]
         }
     },
