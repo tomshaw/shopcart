@@ -45,7 +45,6 @@ final class CartItem
     /**
      * Create a new cart item instance.
      *
-     * @param  float|null  $tax
      * @return void
      */
     public function __construct(
@@ -94,7 +93,6 @@ final class CartItem
     /**
      * Create a new cart item.
      *
-     * @param  float|null  $tax
      * @return \TomShaw\ShopCart\CartItem
      */
     public static function make(int $id, string $name, int $quantity, float $price, float $tax = null): self
