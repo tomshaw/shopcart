@@ -47,7 +47,7 @@ Adding an item with product options to the shopping cart.
 $cartItem = CartItem::make($product->id, $product->name, 1, $product->price);
 
 $cartItem->size = 'XL';
-$cartItem->color = 'blue';
+$cartItem->logo = 'Laravel Rocks';
 
 Cart::add($cartItem);
 ```
