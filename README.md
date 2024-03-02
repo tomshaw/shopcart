@@ -102,9 +102,7 @@ To set a default tax rate add the following environment variable in your applica
 SHOPCART_DEFAULT_TAXRATE=9.547
 ```
 
-Applying item specific tax rates.
-
-> You can easily apply item specific tax rates at run time. 
+You can easily apply item specific tax rates at run time. 
 
 ```php
 use TomShaw\ShopCart\{Cart, CartItem};
