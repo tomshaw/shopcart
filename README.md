@@ -57,10 +57,9 @@ Updating an item and product options in the shoping cart.
 ```php
 $cartItem = Cart::where('id', '===', $id)->first();
 
-$cartItem->quantity = 2;
-
+$cartItem->quantity = 5;
 $cartItem->size = '2XL';
-$cartItem->color = 'PHP Rockz';
+$cartItem->logo = 'PHP Rockz';
 
 Cart::update($cartItem);
 ```
