@@ -60,7 +60,7 @@ $cartItem = Cart::where('id', '===', $id)->first();
 $cartItem->quantity = 2;
 
 $cartItem->size = '2XL';
-$cartItem->color = 'white';
+$cartItem->color = 'PHP Rockz';
 
 Cart::update($cartItem);
 ```
@@ -106,7 +106,7 @@ SHOPCART_DEFAULT_TAXRATE=9.547
 
 Applying item specific tax rates.
 
-> Note: This overrides the default tax rate set in your cart configuration.
+> You can easily apply item specific tax at run time. 
 
 ```php
 use TomShaw\ShopCart\{Cart, CartItem};
