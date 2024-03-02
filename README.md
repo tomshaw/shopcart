@@ -59,7 +59,6 @@ $cartItem = Cart::where('id', '===', $id)->first();
 
 $cartItem->quantity = 5;
 $cartItem->size = '2XL';
-$cartItem->logo = 'PHP Rockz';
 
 Cart::update($cartItem);
 ```
