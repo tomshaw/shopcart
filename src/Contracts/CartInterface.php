@@ -44,12 +44,9 @@ interface CartInterface
     /**
      * Determine cart totals supports "tax", "price", "subtotal" and "quantity".
      *
-     * @param  string  $property tax, price, subtotal and quantity
-     * @param  int  $decimals
-     * @param  string  $decimalSeperator
-     * @param  string  $thousandsSeperator
+     * @param  string  $property  tax, price, subtotal and quantity
      */
-    public function total(string $property, int $decimals = null, string $decimalSeperator = null, string $thousandsSeperator = null, bool $numberFormat = true): mixed;
+    public function total(string $property, ?int $decimals = null, ?string $decimalSeperator = null, ?string $thousandsSeperator = null, bool $numberFormat = true): mixed;
 
     /**
      * Get collection items as JSON.

@@ -22,9 +22,9 @@
         "illuminate/support": "^10.14"
     },
     "require-dev": {
+        "larastan/larastan": "^2.9",
         "laravel/pint": "^1.10",
         "mockery/mockery": "^1.4.4",
-        "nunomaduro/larastan": "^2.6",
         "orchestra/testbench": "^8.5",
         "pestphp/pest": "^2.8",
         "phpstan/phpstan": "^1.10",
@@ -42,6 +42,7 @@
     },
     "scripts" : {
         "analyse" : "vendor/bin/phpstan analyse",
+        "baseline": "vendor/bin/phpstan analyse --ansi --memory-limit=-1 --generate-baseline --allow-empty-baseline",
         "test" : "vendor/bin/pest",
         "format": "vendor/bin/pint --config pint.json"
     },

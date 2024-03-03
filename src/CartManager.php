@@ -60,8 +60,6 @@ final class CartManager implements CartInterface
 
     /**
      * Get cart item by key.
-     *
-     * @return \TomShaw\ShopCart\CartItem
      */
     public function get(int $rowId): CartItem
     {
@@ -99,12 +97,9 @@ final class CartManager implements CartInterface
     /**
      * Determine cart totals supports "tax", "price", "subtotal" and "quantity".
      *
-     * @param  string  $property tax, price, subtotal and quantity
-     * @param  int  $decimals
-     * @param  string  $decimalSeperator
-     * @param  string  $thousandsSeperator
+     * @param  string  $property  tax, price, subtotal and quantity
      */
-    public function total(string $property, int $decimals = null, string $decimalSeperator = null, string $thousandsSeperator = null, bool $numberFormat = true): mixed
+    public function total(string $property, ?int $decimals = null, ?string $decimalSeperator = null, ?string $thousandsSeperator = null, bool $numberFormat = true): mixed
     {
         $found = match ($property) {
             'tax' => 'totalTax',
@@ -139,9 +134,6 @@ final class CartManager implements CartInterface
 
     /**
      * Add cart item to collection.
-     *
-     * @param  \TomShaw\ShopCart\CartItem  $cartItem
-     * @return \TomShaw\ShopCart\CartItem
      */
     public function add(CartItem $cartItem): CartItem
     {
@@ -162,9 +154,6 @@ final class CartManager implements CartInterface
 
     /**
      * Update cart item in collection.
-     *
-     * @param  \TomShaw\ShopCart\CartItem  $cartItem
-     * @return \TomShaw\ShopCart\CartItem
      */
     public function update(CartItem $cartItem): CartItem
     {
@@ -183,9 +172,6 @@ final class CartManager implements CartInterface
 
     /**
      * Remove cart item from collection.
-     *
-     * @param  \TomShaw\ShopCart\CartItem  $cartItem
-     * @return \TomShaw\ShopCart\CartItem
      */
     public function remove(CartItem $cartItem): CartItem
     {

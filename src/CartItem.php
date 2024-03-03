@@ -92,10 +92,8 @@ final class CartItem
 
     /**
      * Create a new cart item.
-     *
-     * @return \TomShaw\ShopCart\CartItem
      */
-    public static function make(int $id, string $name, int $quantity, float $price, float $tax = null): self
+    public static function make(int $id, string $name, int $quantity, float $price, ?float $tax = null): self
     {
         $validator = self::validate($id, $name, $quantity, $price, $tax);
 
