@@ -22,8 +22,7 @@ php artisan vendor:publish --provider="TomShaw\ShopCart\Providers\ShopCartServic
 
 ## Requirements
 
-- `Laravel 10` (https://laravel.com/) 
-- `PHP 8.1` (https://php.net)
+The package is compatible with Laravel 10 and 11.
 
 ## Basic Usage
 
