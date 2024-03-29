@@ -1,8 +1,10 @@
 # ShopCart 🛒
 
-[![Latest Version](https://img.shields.io/github/release/tomshaw/shopcart.svg?style=flat-square)](https://github.com/tomshaw/shopcart/releases)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tomshaw/shopcart/run-tests.yml?branch=master&style=flat-square&label=tests)
-[![Total Downloads](https://img.shields.io/packagist/dt/tomshaw/shopcart.svg?style=flat-square)](https://packagist.org/packages/tomshaw/shopcart)
+![issues](https://img.shields.io/github/issues/tomshaw/shopcart?style=flat&logo=appveyor)
+![forks](https://img.shields.io/github/forks/tomshaw/shopcart?style=flat&logo=appveyor)
+![stars](https://img.shields.io/github/stars/tomshaw/shopcart?style=flat&logo=appveyor)
+[![GitHub license](https://img.shields.io/github/license/tomshaw/shopcart)](https://github.com/tomshaw/shopcart/blob/master/LICENSE)
 
 ShopCart is a modern easy to use [Laravel](https://laravel.com) shopping cart.
 
@@ -164,16 +166,6 @@ Cart::toArray();
 ```php
 Cart::toJson();
 ```
-
-## Testing
-
-``` bash
-composer test
-```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information.
 
 ## Contributing
 
