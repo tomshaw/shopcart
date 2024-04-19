@@ -167,6 +167,10 @@ Cart::toArray();
 Cart::toJson();
 ```
 
+## Changelog
+
+For changes made to the project, see the [Changelog](CHANGELOG.md).
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
