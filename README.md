@@ -6,7 +6,7 @@
 ![stars](https://img.shields.io/github/stars/tomshaw/shopcart?style=flat&logo=appveyor)
 [![GitHub license](https://img.shields.io/github/license/tomshaw/shopcart)](https://github.com/tomshaw/shopcart/blob/master/LICENSE)
 
-ShopCart is a modern easy to use [Laravel](https://laravel.com) shopping cart.
+ShopCart is a modern easy to use [Laravel](https://laravel.com) shopping cart...
 
 ## Installation
 
