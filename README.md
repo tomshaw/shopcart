@@ -1,6 +1,6 @@
 # ShopCart 🛒
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tomshaw/shopcart/run-tests.yml?branch=master&style=flat-square&label=tests)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/tomshaw/shopcart/tests.yml?branch=master&style=flat-square&label=tests)
 ![issues](https://img.shields.io/github/issues/tomshaw/shopcart?style=flat&logo=appveyor)
 ![forks](https://img.shields.io/github/forks/tomshaw/shopcart?style=flat&logo=appveyor)
 ![stars](https://img.shields.io/github/stars/tomshaw/shopcart?style=flat&logo=appveyor)
