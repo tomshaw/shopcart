@@ -43,22 +43,10 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Copy Environment File
-        run: cp .env.example .env
-
-      - name: Generate Application Key
-        run: php artisan key:generate
-
-      - name: Create SQLite Database
-        run: touch database/database.sqlite
-
       - name: Run Pint (Code Style)
         if: ${{ inputs.run-pint != false }}
         run: vendor/bin/pint --test
 
       - name: Run Tests
         if: ${{ inputs.run-tests != false }}
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/sqlite
         run: composer run test
