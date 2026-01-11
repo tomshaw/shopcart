@@ -20,7 +20,7 @@ class ShopCartTest extends TestCase
 
     protected CartItem $cartItemE;
 
-    public function setup(): void
+    protected function setup(): void
     {
         parent::setUp();
 

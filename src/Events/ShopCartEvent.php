@@ -9,6 +9,5 @@ class ShopCartEvent
     public function __construct(
         public string $method,
         public ?CartItem $cartItem
-    ) {
-    }
+    ) {}
 }

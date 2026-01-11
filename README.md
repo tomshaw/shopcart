@@ -24,7 +24,8 @@ php artisan vendor:publish --provider="TomShaw\ShopCart\Providers\ShopCartServic
 
 ## Requirements
 
-The package is compatible with Laravel 10 and 11.
+- PHP 8.4+
+- Laravel 12
 
 ## Basic Usage
 
@@ -47,19 +48,31 @@ Adding an item with product options to the shopping cart.
 ```php
 $cartItem = CartItem::make($product->id, $product->name, 1, $product->price);
 
-$cartItem->size = 'XL';
-$cartItem->logo = 'Laravel Rocks';
+$cartItem->options['size'] = 'XL';
+$cartItem->options['logo'] = 'Laravel Rocks';
 
 Cart::add($cartItem);
 ```
 
-Updating an item and product options in the shoping cart.
+Accessing product options.
+
+```php
+// Array access
+$size = $cartItem->options['size'];
+
+// Or using Collection methods
+$size = $cartItem->options->get('size');
+$cartItem->options->put('color', 'blue');
+$hasSize = $cartItem->options->has('size');
+```
+
+Updating an item and product options in the shopping cart.
 
 ```php
 $cartItem = Cart::where('id', '===', $id)->first();
 
 $cartItem->quantity = 5;
-$cartItem->size = '2XL';
+$cartItem->options['size'] = '2XL';
 
 Cart::update($cartItem);
 ```
@@ -93,6 +106,23 @@ $subTotal = Cart::total('subtotal');
 
 ```php
 $totalTax = Cart::total('tax');
+```
+
+## Computed Properties
+
+Cart items automatically calculate `subTotal`, `totalTax`, and `totalPrice`. These values are computed on-demand and are always accurate.
+
+```php
+$cartItem = CartItem::make(id: 1, name: 'Product', quantity: 2, price: 100.00, tax: 8.5);
+
+// Automatically computed properties
+echo $cartItem->subTotal;    // 200.00 (quantity * price)
+echo $cartItem->totalTax;    // 17.00 (subTotal * tax / 100)
+echo $cartItem->totalPrice;  // 217.00 (subTotal + totalTax)
+
+// Values update automatically when properties change
+$cartItem->quantity = 3;
+echo $cartItem->subTotal;    // 300.00 (automatically recalculated)
 ```
 
 ## Tax Rates
