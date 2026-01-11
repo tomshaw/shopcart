@@ -1,5 +1,32 @@
 # Changelog
 
+## [2.0.0](https://github.com/tomshaw/shopcart/compare/v1.5.2...v2.0.0) (2026-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to PHP 8.4 and Laravel 12
+* upgrade to PHP 8.4 and Laravel 12
+
+### Features
+
+* add issue templates for bug reports, documentation issues, feature requests, general issues, improvements, and questions; update workflows for tests and releases ([ca00185](https://github.com/tomshaw/shopcart/commit/ca00185465d5e1c7dd604ba78a5fbd2b96fa6642))
+* update requirements for PHP and Laravel; enhance CartItem and CartManager with computed properties; simplify event and exception classes; improve test setup method ([0e66af8](https://github.com/tomshaw/shopcart/commit/0e66af8de9c30ace5b033892432e2fb54e221f66))
+* upgrade to PHP 8.4 and Laravel 12 ([19dcf28](https://github.com/tomshaw/shopcart/commit/19dcf2822a74f8953402956fe55c7ba4b9a8d194))
+
+
+### Bug Fixes
+
+* add push trigger to release-please workflow ([f3a4124](https://github.com/tomshaw/shopcart/commit/f3a4124b353d6c7ec113695ce1bac79469afced3))
+* update GitHub Workflow Status badge link in README ([55bba1c](https://github.com/tomshaw/shopcart/commit/55bba1c6120623336a95445e072a3a1ecef0b01c))
+
+
+### Miscellaneous Chores
+
+* **deps:** update PHP and Laravel package requirements in composer.json ([8ea5dfe](https://github.com/tomshaw/shopcart/commit/8ea5dfe9fa1552759691f2ab917e3b0754ec61fe))
+* remove redundant environment setup steps from CI workflow ([619aabc](https://github.com/tomshaw/shopcart/commit/619aabc2ddd035ce3a4142a9187b0e04a4c0a057))
+* upgrade to PHP 8.4 and Laravel 12 ([7578867](https://github.com/tomshaw/shopcart/commit/75788671e1e33099f0ace1a6bcf5cc8877e4eef0))
+
 ## [1.5.2](https://github.com/tomshaw/shopcart/compare/v1.5.1...v1.5.2) (2025-02-03)
 
 
