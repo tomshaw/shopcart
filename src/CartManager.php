@@ -42,21 +42,6 @@ final class CartManager implements CartInterface
         return $this->cart()->get($rowId);
     }
 
-    public function where($key, $operator, $value): Collection
-    {
-        return $this->cart()->where($key, $operator, $value);
-    }
-
-    public function isNotEmpty(): bool
-    {
-        return $this->cart()->isNotEmpty();
-    }
-
-    public function isEmpty(): bool
-    {
-        return $this->cart()->isEmpty();
-    }
-
     public function total(string $property, ?int $decimals = null, ?string $decimalSeperator = null, ?string $thousandsSeperator = null, bool $numberFormat = true): mixed
     {
         $found = match ($property) {

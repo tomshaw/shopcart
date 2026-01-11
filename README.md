@@ -69,7 +69,7 @@ $hasSize = $cartItem->options->has('size');
 Updating an item and product options in the shopping cart.
 
 ```php
-$cartItem = Cart::where('id', '===', $id)->first();
+$cartItem = Cart::all()->where('id', '===', $id)->first();
 
 $cartItem->quantity = 5;
 $cartItem->options['size'] = '2XL';
@@ -151,7 +151,7 @@ SHOPCART_DECIMAL_SEPARATOR="."
 SHOPCART_THOUSANDS_SEPARATOR=","
 ```
 
-### Proxy Methods
+## Cart Methods
 
 Get item from collection by `rowId`.
 
@@ -171,20 +171,19 @@ Get cart as collection or array.
 $cartItems = Cart::all(bool $toArray = false);
 ```
 
-Searching for specific cart items.
+Use Laravel Collection methods for advanced operations.
 
 ```php
-$cartItems = Cart::where('id', '===', $productId);
-```
+// Search for specific cart items
+$cartItems = Cart::all()->where('id', '===', $productId);
 
-Check if the cart is empty or not.
+// Check if cart is empty
+$isEmpty = Cart::all()->isEmpty();
+$isNotEmpty = Cart::all()->isNotEmpty();
 
-```php
-Cart::isEmpty();
-```
-
-```php
-Cart::isNotEmpty();
+// Filter, map, or use any Collection method
+$total = Cart::all()->sum('totalPrice');
+$firstItem = Cart::all()->first();
 ```
 
 Casting the cart as an `array` or `json`;
