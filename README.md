@@ -25,7 +25,7 @@ php artisan vendor:publish --provider="TomShaw\ShopCart\Providers\ShopCartServic
 ## Requirements
 
 - PHP 8.4+
-- Laravel 12
+- Laravel 12+
 
 ## Basic Usage
 
