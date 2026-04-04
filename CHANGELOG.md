@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.2.0](https://github.com/tomshaw/shopcart/compare/v2.1.0...v2.2.0) (2026-04-04)
+
+
+### Features
+
+* apply pint code style fixes and update linting workflow ([3f29d42](https://github.com/tomshaw/shopcart/commit/3f29d42d3726066d929bb46ad89b37cb8c08b2b8))
+* fix pint workflow to use project config and revert incorrect style changes ([0439174](https://github.com/tomshaw/shopcart/commit/04391741c217c15c10e24f1a54e97ab039ac7fa1))
+* use project pint version in CI instead of external action ([9fac9a6](https://github.com/tomshaw/shopcart/commit/9fac9a6bd0c1b6855f6f842a2dd02bd7881b7191))
+
 ## [2.1.0](https://github.com/tomshaw/shopcart/compare/v2.0.1...v2.1.0) (2026-04-04)
 
 
