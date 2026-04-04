@@ -63,7 +63,7 @@ class ShopCartTest extends TestCase
 
     public function test_cart_should_update_and_return_correct_cart_totals(): void
     {
-        $cartItem = Cart::where('id', '===', 2)->first();
+        $cartItem = Cart::all()->where('id', '===', 2)->first();
 
         $cartItem->quantity = 3;
 
@@ -162,6 +162,6 @@ class ShopCartTest extends TestCase
     {
         Cart::forget();
 
-        $this->assertEquals(Cart::IsEmpty(), true);
+        $this->assertEquals(Cart::all()->isEmpty(), true);
     }
 }
