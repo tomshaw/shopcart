@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "TomShaw\ShopCart\": "src"
+            "TomShaw\\ShopCart\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TomShaw\ShopCart\Tests\": "tests"
+            "TomShaw\\ShopCart\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -49,7 +49,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "TomShaw\ShopCart\Providers\ShopCartServiceProvider"
+                "TomShaw\\ShopCart\\Providers\\ShopCartServiceProvider"
             ]
         }
     },
