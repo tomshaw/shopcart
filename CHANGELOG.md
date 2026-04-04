@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/tomshaw/shopcart/compare/v2.0.1...v2.1.0) (2026-04-04)
+
+
+### Features
+
+* standardize CI workflows and update dependencies for Laravel 13 ([f40be2f](https://github.com/tomshaw/shopcart/commit/f40be2f7bb89fbea01f7e30cdce05e43e36d8a82))
+
 ## [2.0.1](https://github.com/tomshaw/shopcart/compare/v2.0.0...v2.0.1) (2026-04-04)
 
 
