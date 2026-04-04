@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/tomshaw/shopcart/compare/v2.0.0...v2.0.1) (2026-04-04)
+
+
+### Bug Fixes
+
+* restore double backslashes in namespace paths (corrupted JSON) ([206f6d0](https://github.com/tomshaw/shopcart/commit/206f6d0d60b567f48dfd6a97505eccd6c6fa5eba))
+
 ## [2.0.0](https://github.com/tomshaw/shopcart/compare/v1.5.2...v2.0.0) (2026-01-11)
 
 
