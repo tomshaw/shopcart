@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.0](https://github.com/tomshaw/shopcart/compare/v2.2.0...v2.3.0) (2026-05-07)
+
+
+### Features
+
+* 🚀 upgrade to Laravel 13 and PHP 8.5 ([18aae4e](https://github.com/tomshaw/shopcart/commit/18aae4e2973db6140b186f7ef01e2c6af4159cb2))
+* add Pest testing framework integration for ShopCart tests ([e3d6b8e](https://github.com/tomshaw/shopcart/commit/e3d6b8eede58763c7a31eeb74e9ad53acd38f33d))
+
 ## [2.2.0](https://github.com/tomshaw/shopcart/compare/v2.1.0...v2.2.0) (2026-04-04)
 
 
